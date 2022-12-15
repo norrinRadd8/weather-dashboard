@@ -1,0 +1,16 @@
+/*** GLOBAL CLASSES ***/
+
+.row, .column {
+    display: flex;
+}
+
+
+
+.form-input {
+    padding-left: 8px;
+}
+
+.mt-3 {
+    border-style: outset;
+    padding-left: 8px;
+}
