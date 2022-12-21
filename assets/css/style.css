@@ -1,10 +1,26 @@
 /*** GLOBAL CLASSES ***/
 
-.row, .column {
+.row {
     display: flex;
+    
+} 
+
+li {
+    list-style: none;
+    border-radius: 4px;
+    background-color: lightgrey;
+    height: 20%;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 5%;
 }
 
-
+.justify-space-between {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    
+}
 
 .form-input {
     padding-left: 8px;
@@ -13,4 +29,11 @@
 .mt-3 {
     border-style: outset;
     padding-left: 8px;
+}
+
+.card-styling {
+    padding: 20px;
+    background-color: aqua;
+    border-radius: 4px;
+    
 }
