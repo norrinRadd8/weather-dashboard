@@ -7,8 +7,9 @@
 var searchBtn = $('#search-button')// Event listener for search
 var searchInput = $('#search-input')
 var today = $('#today')
+var forecast = $('#forecast')
 var apiKey = '0c18a6387cad294737c64ba4dd06b5ff';
-var city = 'Paris';
+var city = 'London';
 var baseURL = 'https://api.openweathermap.org/data/2.5/';
 var currentURL = baseURL + `weather?appid=${apiKey}&units=metric&`;
 var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
@@ -21,31 +22,41 @@ function inputSubmitted(city) {
 
             today.append(`
             <div>
-            <h3>${currentData.name} (${moment().format('D/MM/YYYY')})<img src="${iconUrl + currentData.weather[0].icon + '.png'}" alt="" style="float:right"></h3>
-            </div>
-            <div>
-                <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
-                <p>Wind: ${currentData.wind.speed} mph</p>
-                <p>Humidity: ${currentData.main.humidity}%</p>
+                <h3>${currentData.name} (${moment().format('D/MM/YYYY')})<img src="${iconUrl + currentData.weather[0].icon + '.png'}" alt="" style="float:right">
+                </h3>
+                    <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
+                    <p>Wind: ${currentData.wind.speed} mph</p>
+                    <p>Humidity: ${currentData.main.humidity}%</p>
             </div>
             `)
-
-            // console.log(`
-            // Temp: ${Math.round(currentData.main.temp)}°C
-            // Humidity: ${currentData.main.humidity}%
-            // Wind: ${currentData.wind.speed} mph
-            // Icon URL: ${iconUrl + currentData.weather[0].icon + '.png'}
-            // `)
 
     $.get(forecastURL + `lat=${currentData.coord.lat}&lon=${currentData.coord.lon}`)
         .then(function(forecastData){
             for (var castObj of forecastData.list) {
-                console.log(`${iconUrl + castObj.weather[0].icon}.png`)
+
+                forecast.append(`
+            <div class="card-styling">
+                <h6>${castObj.dt_txt}</h6>
+                <img src="${iconUrl + castObj.weather[0].icon}.png" alt=""> 
+                <p>Temp: ${Math.round(castObj.main.temp)}°C</p>
+                <p>Wind: ${castObj.wind.speed} mph</p>
+                <p>Humidity: ${castObj.main.humidity}%</p>
+            </div>
+                `)
+                
             }
+            console.log(forecastData.list[0] + castObj.dt_txt)
+            console.log(castObj)
+            //console.log(`${forecastData.list[list].dt_txt}`)
         })
     })
 
 }
+
+// <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
+//                 <p>Wind: ${currentData.wind.speed} mph</p>
+//                 <p>Humidity: ${currentData.main.humidity}%</p>
+
 // searchBtn.click(function() {
 //     console.log('hello')
 //     console.log(searchInput.val())
@@ -76,3 +87,11 @@ function inputSubmitted(city) {
 // })
 
 // })
+
+
+            // console.log(`
+            // Temp: ${Math.round(currentData.main.temp)}°C
+            // Humidity: ${currentData.main.humidity}%
+            // Wind: ${currentData.wind.speed} mph
+            // Icon URL: ${iconUrl + currentData.weather[0].icon + '.png'}
+            // `)
