@@ -33,9 +33,13 @@ li {
 
 .card-styling {
     padding: 20px;
-    background-color: aqua;
+    background-color: rgb(53, 73, 73);
     border-radius: 4px;
     font-size: smaller;
+    color: #fff;
     
+}
+.card-styling p {
     
+    color: #fff;
 }

@@ -1,6 +1,3 @@
-// https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-//https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-
 
 // User submits city, city name and date and icon with temp, wind and humidity populates in the DOM
 
@@ -9,7 +6,7 @@ var searchInput = $('#search-input')
 var today = $('#today')
 var forecast = $('#forecast')
 var apiKey = '0c18a6387cad294737c64ba4dd06b5ff';
-var city = 'London';
+var city = 'Qatar';
 var baseURL = 'https://api.openweathermap.org/data/2.5/';
 var currentURL = baseURL + `weather?appid=${apiKey}&units=metric&`;
 var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
@@ -19,7 +16,8 @@ function inputSubmitted(city) {
     $.get(currentURL + `q=${city}`)
         .then(function(currentData) {
             console.log(currentData)
-
+            console.log(city)
+            city = searchInput.val()
             today.append(`
             <div>
                 <h3>${currentData.name} (${moment().format('D/MM/YYYY')})<img src="${iconUrl + currentData.weather[0].icon + '.png'}" alt="" style="float:right">
@@ -36,7 +34,7 @@ function inputSubmitted(city) {
 
                 forecast.append(`
             <div class="card-styling">
-                <h6>${castObj.dt_txt}</h6>
+                <h7><strong>${castObj.dt_txt}</strong></h7>
                 <img src="${iconUrl + castObj.weather[0].icon}.png" alt=""> 
                 <p>Temp: ${Math.round(castObj.main.temp)}°C</p>
                 <p>Wind: ${castObj.wind.speed} mph</p>
@@ -45,24 +43,26 @@ function inputSubmitted(city) {
                 `)
                 
             }
-            console.log(forecastData.list[0] + castObj.dt_txt)
-            console.log(castObj)
-            //console.log(`${forecastData.list[list].dt_txt}`)
+            
         })
     })
 
 }
 
-// <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
-//                 <p>Wind: ${currentData.wind.speed} mph</p>
-//                 <p>Humidity: ${currentData.main.humidity}%</p>
 
-// searchBtn.click(function() {
-//     console.log('hello')
-//     console.log(searchInput.val())
-// })
 
  inputSubmitted(city)
+
+//  searchBtn.click(function() {
+//     console.log('Hello')
+// })
+
+// https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+//https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key} 
+
+ // <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
+//                 <p>Wind: ${currentData.wind.speed} mph</p>
+//                 <p>Humidity: ${currentData.main.humidity}%</p>
 
 
 
