@@ -4,6 +4,10 @@
     display: flex;
     
 } 
+#today {
+    border-style: solid;
+    border-width: 2px;
+}
 
 li {
     list-style: none;
@@ -27,8 +31,7 @@ li {
 }
 
 .mt-3 {
-    border-style: outset;
-    padding-left: 8px;
+    padding: 10px 20px;
 }
 
 .card-styling {
