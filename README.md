@@ -27,7 +27,7 @@ SO THAT I can plan a trip accordingly
 N/A
 
 ## Installation
-* Live link to website for review. 
+* Live link to website for review. https://norrinradd8.github.io/weather-dashboard/
 * GitHub URL. https://github.com/norrinRadd8/weather-dashboard.git
 
 ## Usage
