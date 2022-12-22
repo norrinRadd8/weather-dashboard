@@ -6,18 +6,18 @@ var searchInput = $('#search-input')
 var today = $('#today')
 var forecast = $('#forecast')
 var apiKey = '0c18a6387cad294737c64ba4dd06b5ff';
-var city = 'Qatar';
+var city = '';
 var baseURL = 'https://api.openweathermap.org/data/2.5/';
 var currentURL = baseURL + `weather?appid=${apiKey}&units=metric&`;
 var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
 var iconUrl = 'https://openweathermap.org/img/w/';
 
+
 function inputSubmitted(city) {
+    
     $.get(currentURL + `q=${city}`)
         .then(function(currentData) {
             console.log(currentData)
-            console.log(city)
-            city = searchInput.val()
             today.append(`
             <div>
                 <h3>${currentData.name} (${moment().format('D/MM/YYYY')})<img src="${iconUrl + currentData.weather[0].icon + '.png'}" alt="" style="float:right">
@@ -49,9 +49,14 @@ function inputSubmitted(city) {
 
 }
 
-
-
- inputSubmitted(city)
+ searchBtn.click(function(event){
+    
+    event.preventDefault()
+    city = searchInput.val()
+    inputSubmitted(city)
+    
+    console.log(searchInput.val())
+})
 
 //  searchBtn.click(function() {
 //     console.log('Hello')
