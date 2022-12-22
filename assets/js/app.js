@@ -5,8 +5,9 @@ var searchBtn = $('#search-button')// Event listener for search
 var searchInput = $('#search-input')
 var today = $('#today')
 var forecast = $('#forecast')
+var fiveDayHeader = $('#fiveDayHeader')
 var apiKey = '0c18a6387cad294737c64ba4dd06b5ff';
-var city = '';
+var city = '' ;
 var baseURL = 'https://api.openweathermap.org/data/2.5/';
 var currentURL = baseURL + `weather?appid=${apiKey}&units=metric&`;
 var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
@@ -14,7 +15,9 @@ var iconUrl = 'https://openweathermap.org/img/w/';
 
 
 function inputSubmitted(city) {
-    
+    today.html('')
+    forecast.html('')
+    fiveDayHeader.html('')
     $.get(currentURL + `q=${city}`)
         .then(function(currentData) {
             console.log(currentData)
@@ -26,13 +29,18 @@ function inputSubmitted(city) {
                     <p>Wind: ${currentData.wind.speed} mph</p>
                     <p>Humidity: ${currentData.main.humidity}%</p>
             </div>
-            `)
+            `).removeClass('hide')
+
+            fiveDayHeader.append(`
+                <h3>5-Day Forecast: </h3>
+            `).removeClass('hide')
 
     $.get(forecastURL + `lat=${currentData.coord.lat}&lon=${currentData.coord.lon}`)
         .then(function(forecastData){
             for (var castObj of forecastData.list) {
 
                 forecast.append(`
+                
             <div class="card-styling">
                 <h7><strong>${castObj.dt_txt}</strong></h7>
                 <img src="${iconUrl + castObj.weather[0].icon}.png" alt=""> 
@@ -51,12 +59,18 @@ function inputSubmitted(city) {
 
  searchBtn.click(function(event){
     
-    event.preventDefault()
+    
     city = searchInput.val()
     inputSubmitted(city)
+    event.preventDefault()
     
     console.log(searchInput.val())
 })
+
+// function init() {
+    
+// }
+// init()
 
 //  searchBtn.click(function() {
 //     console.log('Hello')

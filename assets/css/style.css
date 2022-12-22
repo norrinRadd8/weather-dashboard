@@ -49,3 +49,11 @@ li {
     grid-template-columns: repeat(5, 1fr);
     gap: 1em;
 }
+
+.hide {
+    display: none;
+}
+
+#fiveDayHeader {
+    margin-top: 20px;
+}
