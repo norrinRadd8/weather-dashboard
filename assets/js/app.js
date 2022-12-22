@@ -1,11 +1,14 @@
 
 // User submits city, city name and date and icon with temp, wind and humidity populates in the DOM
 
-var searchBtn = $('#search-button')// Event listener for search
+var searchBtn = $('#search-button')
 var searchInput = $('#search-input')
+var historyBtn = $('#history-button')
+var formInput = $('.form-input')
 var today = $('#today')
 var forecast = $('#forecast')
 var fiveDayHeader = $('#fiveDayHeader')
+var listGroup = $('.list-group')
 var apiKey = '0c18a6387cad294737c64ba4dd06b5ff';
 var city = '' ;
 var baseURL = 'https://api.openweathermap.org/data/2.5/';
@@ -13,7 +16,6 @@ var currentURL = baseURL + `weather?appid=${apiKey}&units=metric&`;
 var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
 var iconUrl = 'https://openweathermap.org/img/w/';
 var storeCity = []
-
 
 function inputSubmitted(city) {
     today.html('')
@@ -50,24 +52,40 @@ function inputSubmitted(city) {
                 <p>Wind: ${castObj.wind.speed} mph</p>
                 <p>Humidity: ${castObj.main.humidity}%</p>
             </div>
-                `)
-                
-            }
-            
+                `)   
+            }  
         })
     })
-
 }
 
  searchBtn.click(function(event){
+    
     event.preventDefault()
+    
     city = searchInput.val()
    
     inputSubmitted(city)
-    
+
     storeCity.push(city)
     localStorage.setItem('city', JSON.stringify(storeCity))
-    console.log(storeCity)
+    var getCity = JSON.parse(localStorage.getItem('city'))
+
+
+    //Button not being recognised may revert to li
+
+    listGroup.append(`
+    
+        <button id="history-button" class="listButton">${city}</button>
+        
+    `)
+    historyBtn.click(function(){
+        inputSubmitted(city)
+    })
+    
+
+    console.log(historyBtn)
+    
+
 })
 
 // function init() {
@@ -75,45 +93,3 @@ function inputSubmitted(city) {
 // }
 // init()
 
-//  searchBtn.click(function() {
-//     console.log('Hello')
-// })
-
-// https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-//https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key} 
-
- // <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
-//                 <p>Wind: ${currentData.wind.speed} mph</p>
-//                 <p>Humidity: ${currentData.main.humidity}%</p>
-
-
-
-
-
-
-
-// var iconUrl = 'https://openweathermap.org/img/w/'
-
-// $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
-//   .then(function(currentData) {
-//   console.log(`
-// Temp: ${Math.round(currentData.main.temp)}
-// Wind: ${currentData.wind.speed}
-// Humidity: ${currentData.main.humidity}%
-// Icon URL: ${iconUrl + currentData.weather[0].icon + '.png'}
-// `)
-
-// $.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&appid=${apiKey}&units=metric`)
-//   .then(function(forecastData) {
-//   console.log(forecastData)
-// })
-
-// })
-
-
-            // console.log(`
-            // Temp: ${Math.round(currentData.main.temp)}°C
-            // Humidity: ${currentData.main.humidity}%
-            // Wind: ${currentData.wind.speed} mph
-            // Icon URL: ${iconUrl + currentData.weather[0].icon + '.png'}
-            // `)

@@ -10,14 +10,15 @@
     padding: 10px 20px;
 }
 
-li {
-    list-style: none;
+.list-group {
+    gap: .7em;
+}
+
+.listButton {
+    
     border-radius: 4px;
-    background-color: lightgrey;
-    height: 20%;
-    text-align: center;
+    border-style: none;
     padding: 10px;
-    margin-bottom: 5%;
 }
 
 .justify-space-between {
