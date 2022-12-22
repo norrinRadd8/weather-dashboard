@@ -57,3 +57,9 @@ li {
 #fiveDayHeader {
     margin-top: 20px;
 }
+
+.results  {
+    color: rgb(53, 73, 73);
+    font-size: 1.5rem;
+
+}

@@ -12,12 +12,14 @@ var baseURL = 'https://api.openweathermap.org/data/2.5/';
 var currentURL = baseURL + `weather?appid=${apiKey}&units=metric&`;
 var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
 var iconUrl = 'https://openweathermap.org/img/w/';
+var storeCity = []
 
 
 function inputSubmitted(city) {
     today.html('')
     forecast.html('')
     fiveDayHeader.html('')
+
     $.get(currentURL + `q=${city}`)
         .then(function(currentData) {
             console.log(currentData)
@@ -58,13 +60,14 @@ function inputSubmitted(city) {
 }
 
  searchBtn.click(function(event){
-    
-    
-    city = searchInput.val()
-    inputSubmitted(city)
     event.preventDefault()
+    city = searchInput.val()
+   
+    inputSubmitted(city)
     
-    console.log(searchInput.val())
+    storeCity.push(city)
+    localStorage.setItem('city', JSON.stringify(storeCity))
+    console.log(storeCity)
 })
 
 // function init() {
