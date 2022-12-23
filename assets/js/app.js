@@ -1,6 +1,7 @@
 
 // User submits city, city name and date and icon with temp, wind and humidity populates in the DOM
 
+// Global Variables
 var searchBtn = $('#search-button')
 var searchInput = $('#search-input')
 var historyBtn = $('#history-button')
@@ -17,6 +18,7 @@ var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
 var iconUrl = 'https://openweathermap.org/img/w/';
 var storeCity = []
 
+// Submission code that populates the DOM
 function inputSubmitted(city) {
     today.html('')
     forecast.html('')
@@ -34,7 +36,7 @@ function inputSubmitted(city) {
                     <p>Humidity: ${currentData.main.humidity}%</p>
             </div>
             `).removeClass('hide')
-
+// Populates the 5 Day forecast section
             fiveDayHeader.append(`
                 <h3>5-Day Forecast: </h3>
             `).removeClass('hide')
@@ -53,11 +55,12 @@ function inputSubmitted(city) {
                 <p>Humidity: ${castObj.main.humidity}%</p>
             </div>
                 `)   
+                
             }  
-        })
-    })
+        }) 
+    }) 
 }
-
+// Enables search results, pushes to the array and produce history results
  searchBtn.click(function(event){
     
     event.preventDefault()
@@ -70,23 +73,25 @@ function inputSubmitted(city) {
     localStorage.setItem('city', JSON.stringify(storeCity))
     var getCity = JSON.parse(localStorage.getItem('city'))
 
-
-    //Button not being recognised may revert to li
-
     listGroup.append(`
-    
-        <button id="history-button" class="listButton">${city}</button>
-        
+        <button onclick="historyList()" id="history-button" class="listButton">${getCity.slice(-1)}</button> 
     `)
-    historyBtn.click(function(){
-        inputSubmitted(city)
-    })
-    
 
-    console.log(historyBtn)
-    
+   
+
+console.log(city)
+console.log(storeCity)
+
 
 })
+
+// Will eventually retrieve historical city searches
+function historyList() {
+    (inputSubmitted(city))
+    
+    
+}
+
 
 // function init() {
     
