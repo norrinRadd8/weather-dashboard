@@ -18,6 +18,7 @@ var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
 var iconUrl = 'https://openweathermap.org/img/w/';
 var storeCity = []
 
+
 // Submission code that populates the DOM
 function inputSubmitted(city) {
     today.html('')
@@ -41,14 +42,14 @@ function inputSubmitted(city) {
                 <h3>5-Day Forecast: </h3>
             `).removeClass('hide')
 
-    $.get(forecastURL + `lat=${currentData.coord.lat}&lon=${currentData.coord.lon}`)
+    $.get(forecastURL + `lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&cnt=5`)
         .then(function(forecastData){
+            
             for (var castObj of forecastData.list) {
-
                 forecast.append(`
                 
             <div class="card-styling">
-                <h7><strong>${castObj.dt_txt}</strong></h7>
+                <h6><strong>${moment(castObj.dt_txt.split(' ')[0]).format('DD/MM/YYYY')}</strong></h6>
                 <img src="${iconUrl + castObj.weather[0].icon}.png" alt=""> 
                 <p>Temp: ${Math.round(castObj.main.temp)}°C</p>
                 <p>Wind: ${castObj.wind.speed} mph</p>
@@ -56,7 +57,7 @@ function inputSubmitted(city) {
             </div>
                 `)   
                 
-            }  
+            }  console.log(forecastData.list)
         }) 
     }) 
 }
