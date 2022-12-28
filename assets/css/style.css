@@ -9,13 +9,15 @@
     border-width: 2px;
     padding: 10px 20px;
 }
+#today h1 {
+    color: crimson;
+}
 
 .list-group {
     gap: .7em;
 }
 
 .listButton {
-    
     border-radius: 4px;
     border-style: none;
     padding: 10px;

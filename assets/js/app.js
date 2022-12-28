@@ -21,13 +21,13 @@ var storeCity = []
 
 // Submission code that populates the DOM
 function inputSubmitted(city) {
-    today.html('')
-    forecast.html('')
-    fiveDayHeader.html('')
+    today.html(' ')
+    forecast.html(' ')
+    fiveDayHeader.html(' ')
 
     $.get(currentURL + `q=${city}`)
         .then(function(currentData) {
-            console.log(currentData)
+            //console.log(currentData)
             today.append(`
             <div>
                 <h3>${currentData.name} (${moment().format('D/MM/YYYY')})<img src="${iconUrl + currentData.weather[0].icon + '.png'}" alt="" style="float:right">
@@ -42,14 +42,14 @@ function inputSubmitted(city) {
                 <h3>5-Day Forecast: </h3>
             `).removeClass('hide')
 
-    $.get(forecastURL + `lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&cnt=5`)
+    $.get(forecastURL + `lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&cnt=40`)
         .then(function(forecastData){
             
             for (var castObj of forecastData.list) {
                 forecast.append(`
                 
             <div class="card-styling">
-                <h6><strong>${moment(castObj.dt_txt.split(' ')[0]).format('DD/MM/YYYY')}</strong></h6>
+                <h6><strong>${moment(castObj.dt_txt.split(' ')[0]).format('D/MM/YYYY')}</strong></h6>
                 <img src="${iconUrl + castObj.weather[0].icon}.png" alt=""> 
                 <p>Temp: ${Math.round(castObj.main.temp)}°C</p>
                 <p>Wind: ${castObj.wind.speed} mph</p>
@@ -63,12 +63,22 @@ function inputSubmitted(city) {
 }
 // Enables search results, pushes to the array and produce history results
  searchBtn.click(function(event){
-    
     event.preventDefault()
-    
-    city = searchInput.val()
+    city = searchInput.val().trim()
    
     inputSubmitted(city)
+
+
+    if(!city || !city.match()){ // Need to review this only checks a no entry
+        event.preventDefault()
+        console.log(`Please enter a valid city`)
+        searchInput.val(' ')
+        today.html(' ')
+        forecast.html(' ')
+        fiveDayHeader.html(' ')
+        today.append(`<h1>Please enter a valid city name!</h1>`).removeClass('hide')
+        return 
+    } 
 
     storeCity.push(city)
     localStorage.setItem('city', JSON.stringify(storeCity))
@@ -77,20 +87,28 @@ function inputSubmitted(city) {
     listGroup.append(`
         <button onclick="historyList()" id="history-button" class="listButton">${getCity.slice(-1)}</button> 
     `)
-
-   
+    
+    searchInput.val(' ')
+    
 
 console.log(city)
 console.log(storeCity)
-
+    
 
 })
 
 // Will eventually retrieve historical city searches
 function historyList() {
-    (inputSubmitted(city))
+    var getCity = JSON.parse(localStorage.getItem('city'))
+     historyBtn.click(function(event){
+       event.preventDefault()  
+        console.log('Button Clicked!')
+        
+     })
     
-    
+    console.log('Button Clicked!')
+    console.log(getCity)
+    inputSubmitted(getCity)
 }
 
 
