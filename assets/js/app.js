@@ -68,16 +68,8 @@ function inputSubmitted(city) {
    
     inputSubmitted(city)
 
-
-    if(!city || !city.match()){ // Need to review this only checks a no entry
-        event.preventDefault()
-        console.log(`Please enter a valid city`)
-        searchInput.val(' ')
-        today.html(' ')
-        forecast.html(' ')
-        fiveDayHeader.html(' ')
-        today.append(`<h1>Please enter a valid city name!</h1>`).removeClass('hide')
-        return 
+    if(!city){ // Need to review this only checks a no entry           
+        return today.append(`<h1>Please enter a valid city name!</h1>`).removeClass('hide')   
     } 
 
     storeCity.push(city)
@@ -90,26 +82,33 @@ function inputSubmitted(city) {
     
     searchInput.val(' ')
     
-
 console.log(city)
-console.log(storeCity)
-    
+console.log(storeCity)    
 
 })
 
 // Will eventually retrieve historical city searches
+
 function historyList() {
     var getCity = JSON.parse(localStorage.getItem('city'))
-     historyBtn.click(function(event){
-       event.preventDefault()  
-        console.log('Button Clicked!')
+    historyBtn.click(() => {
+        // May need an IF statement to retrieve and match what I have entered into the array
         
-     })
-    
-    console.log('Button Clicked!')
-    console.log(getCity)
-    inputSubmitted(getCity)
+})
+inputSubmitted(getCity)
 }
+// function historyList() {
+//     var getCity = JSON.parse(localStorage.getItem('city'))
+//      historyBtn.click(function(event){
+//        event.preventDefault()  
+//         console.log('Button Clicked!')
+        
+//      })
+    
+//     console.log('Button Clicked!')
+//     console.log(getCity)
+//     inputSubmitted(getCity)
+// }
 
 
 // function init() {
