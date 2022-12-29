@@ -87,16 +87,27 @@ console.log(storeCity)
 
 })
 
-// Will eventually retrieve historical city searches
+ // Will eventually retrieve historical city searches
 
 function historyList() {
-    var getCity = JSON.parse(localStorage.getItem('city'))
-    historyBtn.click(() => {
-        // May need an IF statement to retrieve and match what I have entered into the array
+    var getCity = JSON.parse(localStorage.getItem('city')) 
+    
+    
+
+      for(var text of getCity) {
+        inputSubmitted(text)
+        console.log(text)
+   
+    }
+} 
+    // historyBtn.click((event) => {
+    //     // May need an IF statement to retrieve and match what I have entered into the array
+    //     console.log(event)
         
-})
-inputSubmitted(getCity)
-}
+// })
+
+
+
 // function historyList() {
 //     var getCity = JSON.parse(localStorage.getItem('city'))
 //      historyBtn.click(function(event){
