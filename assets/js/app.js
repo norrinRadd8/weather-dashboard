@@ -1,4 +1,3 @@
-
 // User submits city, city name and date and icon with temp, wind and humidity populates in the DOM
 
 // Global Variables
@@ -17,7 +16,6 @@ var currentURL = baseURL + `weather?appid=${apiKey}&units=metric&`;
 var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
 var iconUrl = 'https://openweathermap.org/img/w/';
 var storeCity = []
-
 
 // Submission code that populates the DOM
 function inputSubmitted(city) {
@@ -46,8 +44,7 @@ function inputSubmitted(city) {
         .then(function(forecastData){
             
             for (var castObj of forecastData.list) {
-                forecast.append(`
-                
+                forecast.append(`   
             <div class="card-styling">
                 <h6><strong>${moment(castObj.dt_txt.split(' ')[0]).format('D/MM/YYYY')}</strong></h6>
                 <img src="${iconUrl + castObj.weather[0].icon}.png" alt=""> 
@@ -57,7 +54,7 @@ function inputSubmitted(city) {
             </div>
                 `)   
                 
-            }  console.log(forecastData.list)
+            }  //console.log(forecastData.list)
         }) 
     }) 
 }
@@ -68,62 +65,43 @@ function inputSubmitted(city) {
    
     inputSubmitted(city)
 
-    if(!city){ // Need to review this only checks a no entry           
+    if(!city){ // Need to review this,so far, only checks a no entry          
         return today.append(`<h1>Please enter a valid city name!</h1>`).removeClass('hide')   
+        
     } 
 
     storeCity.push(city)
     localStorage.setItem('city', JSON.stringify(storeCity))
     var getCity = JSON.parse(localStorage.getItem('city'))
 
-    listGroup.append(`
-        <button onclick="historyList()" id="history-button" class="listButton">${getCity.slice(-1)}</button> 
-    `)
+    cityList()
     
-    searchInput.val(' ')
-    
-console.log(city)
-console.log(storeCity)    
+  
+    //searchInput.val(' ')
+   
+console.log((city)) 
 
 })
 
+function cityList() {
+
+    var getCity = JSON.parse(localStorage.getItem('city'))
+    
+        listGroup.append(`
+        <button onclick="historyList()" id="history-button" class="listButton">${getCity.slice(-1)}</button> 
+    `)
+    
+}
+
  // Will eventually retrieve historical city searches
+ // What I have is a button that is not unique and on click does the last event triggered
+ // Need to match
 
-function historyList() {
-    var getCity = JSON.parse(localStorage.getItem('city')) 
-    
-    
-
-      for(var text of getCity) {
-        inputSubmitted(text)
-        console.log(text)
+function historyList(city) {
+    var getCity = JSON.parse(localStorage.getItem('city'))
+    city = inputSubmitted(getCity)
    
     }
-} 
-    // historyBtn.click((event) => {
-    //     // May need an IF statement to retrieve and match what I have entered into the array
-    //     console.log(event)
-        
-// })
 
 
-
-// function historyList() {
-//     var getCity = JSON.parse(localStorage.getItem('city'))
-//      historyBtn.click(function(event){
-//        event.preventDefault()  
-//         console.log('Button Clicked!')
-        
-//      })
-    
-//     console.log('Button Clicked!')
-//     console.log(getCity)
-//     inputSubmitted(getCity)
-// }
-
-
-// function init() {
-    
-// }
-// init()
 
