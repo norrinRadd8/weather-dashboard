@@ -72,8 +72,7 @@ function inputSubmitted(city) {
 
     storeCity.push(city)
     localStorage.setItem('city', JSON.stringify(storeCity))
-    var getCity = JSON.parse(localStorage.getItem('city'))
-
+    
     cityList()
     
   
@@ -83,13 +82,19 @@ console.log((city))
 
 })
 
+// {/* <button onclick="historyList()" id="history-button" class="listButton">${getCity.slice(-1)}</button>  */}
+
 function cityList() {
 
     var getCity = JSON.parse(localStorage.getItem('city'))
     
+    for(var city of getCity) {
         listGroup.append(`
-        <button onclick="historyList()" id="history-button" class="listButton">${getCity.slice(-1)}</button> 
+        <button onclick="historyList(event)" class="listButton">${city}</button> 
     `)
+
+    }
+        
     
 }
 
@@ -97,8 +102,8 @@ function cityList() {
  // What I have is a button that is not unique and on click does the last event triggered
  // Need to match
 
-function historyList(city) {
-    var getCity = JSON.parse(localStorage.getItem('city'))
+function historyList(event) {
+    var getCity = $(event.target).text()
     city = inputSubmitted(getCity)
    
     }
