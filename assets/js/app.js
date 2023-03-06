@@ -110,29 +110,6 @@ searchBtn.click(async function (event) {
   console.log(city);
 });
 
-// searchBtn.click(function (event) {
-//   event.preventDefault();
-//   city = searchInput.val().trim();
-
-//   inputSubmitted(city);
-
-//   if (!city || !/^[a-zA-Z\s\-]+$/.test(city)) {
-//     // Need to review this,so far, only checks a no entry
-//     return today
-//       .append(`<h1>Please enter a valid city name!</h1>`)
-//       .removeClass("hide");
-//   }
-
-//   storeCity.push(city);
-//   localStorage.setItem("city", JSON.stringify(storeCity));
-
-//   cityList();
-
-//   //searchInput.val(' ')
-
-//   console.log(city);
-// });
-
 function cityList() {
   var getCity = JSON.parse(localStorage.getItem("city"));
   listGroup.html("");
