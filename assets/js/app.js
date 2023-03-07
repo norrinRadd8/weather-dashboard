@@ -16,6 +16,7 @@ var currentURL = baseURL + `weather?appid=${apiKey}&units=metric&`;
 var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
 var iconUrl = "https://openweathermap.org/img/w/";
 var storeCity = [];
+var searchHistory = [];
 
 // Submission code that populates the DOM
 function inputSubmitted(city) {
@@ -31,9 +32,7 @@ function inputSubmitted(city) {
             <div>
                 <h3>${currentData.name} (${moment().format(
           "D/MM/YYYY"
-        )})<img src="${
-          iconUrl + currentData.weather[0].icon + ".png"
-        }" alt="" style="float:right">
+        )})<img src="${`assets/images/openweathermap/${currentData.weather[0].icon}.svg`}" alt="" style="float:right">
                 </h3>
                     <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
                     <p>Wind: ${currentData.wind.speed} mph</p>
@@ -109,29 +108,6 @@ searchBtn.click(async function (event) {
 
   console.log(city);
 });
-
-// searchBtn.click(function (event) {
-//   event.preventDefault();
-//   city = searchInput.val().trim();
-
-//   inputSubmitted(city);
-
-//   if (!city || !/^[a-zA-Z\s\-]+$/.test(city)) {
-//     // Need to review this,so far, only checks a no entry
-//     return today
-//       .append(`<h1>Please enter a valid city name!</h1>`)
-//       .removeClass("hide");
-//   }
-
-//   storeCity.push(city);
-//   localStorage.setItem("city", JSON.stringify(storeCity));
-
-//   cityList();
-
-//   //searchInput.val(' ')
-
-//   console.log(city);
-// });
 
 function cityList() {
   var getCity = JSON.parse(localStorage.getItem("city"));
