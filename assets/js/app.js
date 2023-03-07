@@ -14,7 +14,7 @@ var city = "";
 var baseURL = "https://api.openweathermap.org/data/2.5/";
 var currentURL = baseURL + `weather?appid=${apiKey}&units=metric&`;
 var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
-var iconUrl = "https://openweathermap.org/img/w/";
+// var iconUrl = "https://openweathermap.org/img/w/";
 var storeCity = [];
 var searchHistory = [];
 
@@ -30,10 +30,9 @@ function inputSubmitted(city) {
       .append(
         `
             <div>
-                <h3>${currentData.name} (${moment().format(
-          "D/MM/YYYY"
-        )})<img src="${`assets/images/openweathermap/${currentData.weather[0].icon}.svg`}" alt="" style="float:right">
-                </h3>
+                <h3>${currentData.name} (${moment().format("ddd")})</h3>
+        <img src="${`assets/images/openweathermap/${currentData.weather[0].icon}.svg`}" class="big-image" alt="">
+                
                     <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
                     <p>Wind: ${currentData.wind.speed} mph</p>
                     <p>Humidity: ${currentData.main.humidity}%</p>
@@ -45,8 +44,8 @@ function inputSubmitted(city) {
     fiveDayHeader
       .append(
         `
-                <h3>5-Day Forecast: </h3>
-            `
+      <h3>5-Day Forecast:</h3>
+    `
       )
       .removeClass("hide");
 
@@ -54,26 +53,26 @@ function inputSubmitted(city) {
       forecastURL +
         `lat=${currentData.coord.lat}&lon=${currentData.coord.lon}&cnt=40`
     ).then(function (forecastData) {
-      var dayCount = 1;
+      var dayCount = 0;
+      var dayTracker = {};
 
       for (var castObj of forecastData.list) {
-        if (dayCount <= 5) {
+        const castDate = moment(castObj.dt_txt.split(" ")[0]).format("ddd");
+
+        if (dayCount < 5 && !dayTracker[castDate]) {
           forecast.append(`   
-            <div class="card-styling">
-                <h6><strong>${moment(castObj.dt_txt.split(" ")[0]).format(
-                  "D/MM/YYYY"
-                )}</strong></h6>
-                <img src="${iconUrl + castObj.weather[0].icon}.png" alt=""> 
-                <p>Temp: ${Math.round(castObj.main.temp)}°C</p>
-                <p>Wind: ${castObj.wind.speed} mph</p>
-                <p>Humidity: ${castObj.main.humidity}%</p>
-            </div>
-                `);
+          <div class="card-styling">
+            <h6><strong>${castDate}</strong></h6>
+            <img src="${`assets/images/openweathermap/${castObj.weather[0].icon}.svg`}" alt=""> 
+            <p>${Math.round(castObj.main.temp)}°C</p>
+            <p>Wind: ${castObj.wind.speed} mph</p>
+            <p>Humidity: ${castObj.main.humidity}%</p>
+          </div>
+        `);
           dayCount++;
-        } else {
-          break;
+          dayTracker[castDate] = true;
         }
-      } //console.log(forecastData.list)
+      }
     });
   });
 }
@@ -87,7 +86,7 @@ searchBtn.click(async function (event) {
 
   if (!city || !/^[a-zA-Z\s\-]+$/.test(city)) {
     return today
-      .append(`<h1>Please enter a valid city name!</h1>`)
+      .append(`<h1>Please enter a valid country or city name!</h1>`)
       .removeClass("hide");
   }
 
@@ -97,7 +96,7 @@ searchBtn.click(async function (event) {
 
   if (!response.ok) {
     return today
-      .append(`<h1>Please enter a valid city name!</h1>`)
+      .append(`<h1>Please enter a valid country or city name!</h1>`)
       .removeClass("hide");
   }
 
