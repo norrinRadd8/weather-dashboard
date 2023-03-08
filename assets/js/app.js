@@ -82,9 +82,15 @@ searchBtn.click(async function (event) {
   city = searchInput.val().trim();
 
   if (!city || !/^[a-zA-Z\s\-]+$/.test(city)) {
-    return today
-      .append(`<h1>Please enter a valid country or city name!</h1>`)
-      .removeClass("hide");
+    // Check if message already displayed
+    if ($("#invalid-input").length === 0) {
+      today
+        .append(
+          `<h1 id="invalid-input">Please enter a valid country or city name!</h1>`
+        )
+        .removeClass("hide");
+    }
+    return;
   }
 
   const response = await fetch(
@@ -92,9 +98,15 @@ searchBtn.click(async function (event) {
   );
 
   if (!response.ok) {
-    return today
-      .append(`<h1>Please enter a valid country or city name!</h1>`)
-      .removeClass("hide");
+    // Check if message already displayed
+    if ($("#invalid-input").length === 0) {
+      today
+        .append(
+          `<h1 id="invalid-input">Please enter a valid country or city name!</h1>`
+        )
+        .removeClass("hide");
+    }
+    return;
   }
 
   var storedCities = JSON.parse(localStorage.getItem("city")) || [];
