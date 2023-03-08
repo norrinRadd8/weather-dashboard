@@ -1,11 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100&display=swap');
+
 /*** GLOBAL CLASSES ***/
+body{
+    background-color: #0D1829 !important;
+    font-family: 'Jost' !important;
+    
+}
 
 .row {
     display: flex;  
 } 
 
 .container-fluid {
-    background-color: aqua;
+    background-color: #4FFFD6;
 }
 
 .form {
@@ -19,26 +26,27 @@
 .form-group {
     display: flex;
     justify-content: center;
-    width: 100%
+    width: 100%;
 }
 
 .input-group {
     flex-wrap: wrap;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;  
+    justify-content: space-evenly; 
 }
 
 .form-input {
     width: 85%;
     border-radius: 8px;
-    border-width: 1px;
+    border-style: none;
+    background: #0D1829;
     padding: 8px; 
 }
 
 .search-input {
-    background-color: aqua;
-    color: #565656;
+    background-color: #92ffe5;
+    color: #fff !important;
 }
 
 .search-input::placeholder {
@@ -54,6 +62,53 @@
     flex-direction: row !important;
     gap: .7em;
     font-size: 10px;
+    color: #fff;
+    z-index: 6;
+}
+
+.current-data {
+   color: #4FFFD6 !important;
+   
+}
+
+.current-data, .date {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+}
+
+.current-temp {
+ display: flex;
+ justify-content: center; 
+ font-size: 80px;  
+ color: #fff;
+}
+
+.description {
+    display: flex;
+    justify-content: center;
+    color: #4FFFD6;
+}
+
+.current-wind {
+    display: flex;
+    justify-content: center; 
+    color: #fff;
+   }
+
+.current-humidity {
+    display: flex;
+    justify-content: center; 
+    color: #fff;
+   }
+
+.big-image {
+    display: flex;
+    justify-content: center;
+}
+
+.big-image img {
+    width: 20%;
 }
 
 /* #today {
@@ -96,19 +151,11 @@
     
 }
 
-
-
 img{
     vertical-align: middle;
     border-style: none;
     width: 40%;
     float: right;
-}
-
-.big-image {
-    display: flex;
-    align-items: baseline;
-    width: 40%;
 }
 
 .card-styling {
