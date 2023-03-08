@@ -29,14 +29,35 @@ function inputSubmitted(city) {
       .append(
         `
             <div>
-                <h3 class="current-data">${
-                  currentData.name
-                }</h3> <h3 class="date>(${moment().format("ddd")})</h3>
-        <img src="${`assets/images/openweathermap/${currentData.weather[0].icon}.svg`}" class="big-image" alt="">
-                
-                    <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
-                    <p>Wind: ${currentData.wind.speed} mph</p>
-                    <p>Humidity: ${currentData.main.humidity}%</p>
+            <h3 class="date">${moment().format("ddd DD MMM, YYYY")}</h3>
+            <h3 class="current-data">${currentData.name}</h3> 
+
+        <div class="big-image"><img src="${`assets/images/openweathermap/${currentData.weather[0].icon}.svg`}"  alt=""></div>
+                    <p class="current-temp">${Math.round(
+                      currentData.main.temp
+                    )}°C</p>
+                    <p class="description">${
+                      currentData.weather[0].description
+                    }</p>
+                    
+                    <div class="grid-data">
+                    
+                      <p class="current-wind"><img class="grid-icon" src=${`assets/images/openweathermap/50n.svg`}>${
+          currentData.wind.speed
+        }</p>
+                      <p class="current-humidity"><img class="grid-icon" src=${`assets/images/openweathermap/humidity.svg`}>${
+          currentData.main.humidity
+        }%</p>
+
+        <p class="current-sunrise"><img class="grid-icon" src=${`assets/images/openweathermap/clear-day.svg`}>${moment
+          .unix(currentData.sys.sunrise)
+          .format(`HH:mm`)}</p>
+
+          <p class="current-sunset"><img class="grid-icon" src=${`assets/images/openweathermap/clear-night.svg`}>${moment
+          .unix(currentData.sys.sunset)
+          .format(`HH:mm`)}</p>
+
+                    </div>
             </div>
             `
       )
@@ -61,15 +82,15 @@ function inputSubmitted(city) {
         const castDate = moment(castObj.dt_txt.split(" ")[0]).format("ddd");
 
         if (dayCount < 5 && !dayTracker[castDate]) {
-          forecast.append(`   
-          <div class="card-styling">
-            <h6><strong>${castDate}</strong></h6>
-            <img src="${`assets/images/openweathermap/${castObj.weather[0].icon}.svg`}" alt=""> 
-            <p>${Math.round(castObj.main.temp)}°C</p>
-            <p>Wind: ${castObj.wind.speed} mph</p>
-            <p>Humidity: ${castObj.main.humidity}%</p>
-          </div>
-        `);
+          // forecast.append(`
+          //   <div class="card-styling">
+          //     <h6><strong>${castDate}</strong></h6>
+          //     <img src="${`assets/images/openweathermap/${castObj.weather[0].icon}.svg`}" alt="">
+          //     <p>${Math.round(castObj.main.temp)}°C</p>
+          //     <p>Wind: ${castObj.wind.speed} mph</p>
+          //     <p>Humidity: ${castObj.main.humidity}%</p>
+          //   </div>
+          // `);
           dayCount++;
           dayTracker[castDate] = true;
         }
