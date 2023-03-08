@@ -23,7 +23,6 @@ function inputSubmitted(city) {
   today.html(" ");
   forecast.html(" ");
   fiveDayHeader.html(" ");
-
   $.get(currentURL + `q=${city}`).then(function (currentData) {
     console.log(currentData);
     today
@@ -84,14 +83,16 @@ searchBtn.click(async function (event) {
   event.preventDefault();
   city = searchInput.val().trim();
 
-  inputSubmitted(city);
-
   if (!city || !/^[a-zA-Z\s\-]+$/.test(city)) {
-    return today
-      .append(
-        `<h1 class="validate-message">Please enter a valid country or city name!</h1>`
-      )
-      .removeClass("hide");
+    // Check if message already displayed
+    if ($("#invalid-input").length === 0) {
+      today
+        .append(
+          `<h1 id="invalid-input">Please enter a valid country or city name!</h1>`
+        )
+        .removeClass("hide");
+    }
+    return;
   }
 
   const response = await fetch(
@@ -99,33 +100,44 @@ searchBtn.click(async function (event) {
   );
 
   if (!response.ok) {
-    return today
-      .append(
-        `<h1 class="validate-message">Please enter a valid country or city name!</h1>`
-      )
-      .removeClass("hide");
+    // Check if message already displayed
+    if ($("#invalid-input").length === 0) {
+      today
+        .append(
+          `<h1 id="invalid-input">Please enter a valid country or city name!</h1>`
+        )
+        .removeClass("hide");
+    }
+    return;
   }
 
-  storeCity.push(city);
-  localStorage.setItem("city", JSON.stringify(storeCity));
+  var storedCities = JSON.parse(localStorage.getItem("city")) || [];
+  if (!storedCities.includes(city)) {
+    storedCities.push(city);
+    localStorage.setItem("city", JSON.stringify(storedCities));
+  }
 
   cityList();
+  inputSubmitted(city);
+  searchInput.val("");
 
   console.log(city);
 });
 
 function cityList() {
-  var getCity = JSON.parse(localStorage.getItem("city"));
-  listGroup.html("");
+  var storedCities = JSON.parse(localStorage.getItem("city")) || [];
+  var uniqueCities = new Set(storedCities);
+  var lastFiveCities = Array.from(uniqueCities).slice(-5);
 
-  for (var i = Math.max(getCity.length - 5, 0); i < getCity.length; i++) {
+  listGroup.empty();
+
+  for (let city of lastFiveCities) {
     listGroup.append(`
-            <button onclick="historyList(event)" class="listButton">${getCity[i]}</button> 
-        `);
+      <button onclick="historyList('${city}')" class="listButton">${city}</button> 
+    `);
   }
 }
 
-function historyList(event) {
-  var getCity = $(event.target).text();
-  city = inputSubmitted(getCity);
+function historyList(city) {
+  inputSubmitted(city);
 }
