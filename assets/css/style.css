@@ -49,15 +49,26 @@
     background-position: left center;
   }
 
-#today {
+  .list-group {
+    display: flex;
+    flex-direction: row !important;
+    gap: .7em;
+    font-size: 10px;
+}
+
+/* #today {
     border-style: solid;
     border-width: 1px;
     padding: 8px;
     border-radius: 8px;
     width: 100%;
-}
-#today h1 {
+} */
+.validate-message {
     color: crimson;
+    font-size: medium;
+    display: flex;
+    justify-content: center;
+    
 }
 
 .today-main {
@@ -70,10 +81,7 @@
     display: flex;
 }
 
-.list-group {
-    gap: .7em;
-    font-size: 10px;
-}
+
 
 .listButton {
     background: none;

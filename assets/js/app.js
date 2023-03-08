@@ -29,7 +29,9 @@ function inputSubmitted(city) {
       .append(
         `
             <div>
-                <h3>${currentData.name} (${moment().format("ddd")})</h3>
+                <h3 class="current-data">${
+                  currentData.name
+                }</h3> <h3 class="date>(${moment().format("ddd")})</h3>
         <img src="${`assets/images/openweathermap/${currentData.weather[0].icon}.svg`}" class="big-image" alt="">
                 
                     <p>Temp: ${Math.round(currentData.main.temp)}°C</p>
