@@ -82,15 +82,15 @@ function inputSubmitted(city) {
         const castDate = moment(castObj.dt_txt.split(" ")[0]).format("ddd");
 
         if (dayCount < 5 && !dayTracker[castDate]) {
-          // forecast.append(`
-          //   <div class="card-styling">
-          //     <h6><strong>${castDate}</strong></h6>
-          //     <img src="${`assets/images/openweathermap/${castObj.weather[0].icon}.svg`}" alt="">
-          //     <p>${Math.round(castObj.main.temp)}°C</p>
-          //     <p>Wind: ${castObj.wind.speed} mph</p>
-          //     <p>Humidity: ${castObj.main.humidity}%</p>
-          //   </div>
-          // `);
+          forecast.append(`
+            <div class="card-styling">
+              <h6><strong>${castDate}</strong></h6>
+              <img src="${`assets/images/openweathermap/${castObj.weather[0].icon}.svg`}" alt="">
+              <p>${Math.round(castObj.main.temp)}°C</p>
+              <p>Wind: ${castObj.wind.speed} mph</p>
+              <p>Humidity: ${castObj.main.humidity}%</p>
+            </div>
+          `);
           dayCount++;
           dayTracker[castDate] = true;
         }
