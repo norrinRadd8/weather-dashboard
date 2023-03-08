@@ -36,6 +36,10 @@ body{
     justify-content: space-evenly; 
 }
 
+.search-button {
+    font-weight: 900;
+}
+
 .form-input {
     width: 85%;
     border-radius: 8px;
@@ -51,10 +55,13 @@ body{
 
 .search-input::placeholder {
     padding-left: 2em;
-    background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Cpath fill=%22%23bbb%22 d=%22M503.3 475.7L365.4 337.8c31.4-38.4 50.6-87.4 50.6-140.5C416 85.4 330.6 0 217 0S18 85.4 18 191.3s85.4 191.3 191 191.3c53.1 0 102.1-19.2 140.5-50.6l137.9 137.9c9.3 9.3 24.5 9.3 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6.1-34zM209 352.6c-78.7 0-142.6-63.9-142.6-142.6S130.3 67.4 209 67.4 351.6 131.3 351.6 210s-63.9 142.6-142.6 142.6z%22/%3E%3C/svg%3E');
+    background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Cpath fill=%22%230d1829%22 d=%22M503.3 475.7L365.4 337.8c31.4-38.4 50.6-87.4 50.6-140.5C416 85.4 330.6 0 217 0S18 85.4 18 191.3s85.4 191.3 191 191.3c53.1 0 102.1-19.2 140.5-50.6l137.9 137.9c9.3 9.3 24.5 9.3 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6.1-34zM209 352.6c-78.7 0-142.6-63.9-142.6-142.6S130.3 67.4 209 67.4 351.6 131.3 351.6 210s-63.9 142.6-142.6 142.6z%22/%3E%3C/svg%3E');
     background-repeat: no-repeat;
     background-size: 1.2em;
     background-position: left center;
+    color: #0D1829;
+    font-weight: 900;
+    font-size: larger;
   }
 
   .list-group {
@@ -90,17 +97,27 @@ body{
     color: #4FFFD6;
 }
 
-.current-wind {
+.grid-data {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.grid-icon {
     display: flex;
-    justify-content: center; 
+}
+
+.current-wind,
+.current-humidity,
+.current-sunrise,
+.current-sunset
+ {
+    display: grid;
+    place-items: center;
     color: #fff;
    }
 
-.current-humidity {
-    display: flex;
-    justify-content: center; 
-    color: #fff;
-   }
 
 .big-image {
     display: flex;
@@ -164,10 +181,9 @@ img{
     border-radius: 4px;
     font-size: medium;
     color: #fff;
-    
 }
+
 .card-styling p {
-    
     color: #fff;
 }
 
@@ -194,7 +210,7 @@ img{
     flex-direction: row;
 }
 .results  {
-    color: rgb(53, 73, 73);
+    color: #fff;
     font-size: 1.5rem;
 
 }
@@ -204,3 +220,4 @@ img{
         width: 50%;
     }
 }
+

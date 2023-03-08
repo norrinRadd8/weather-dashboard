@@ -39,12 +39,25 @@ function inputSubmitted(city) {
                     <p class="description">${
                       currentData.weather[0].description
                     }</p>
-                    <p class="current-wind">Wind: ${
-                      currentData.wind.speed
-                    } mph</p>
-                    <p class="current-humidity">Humidity: ${
-                      currentData.main.humidity
-                    }%</p>
+                    
+                    <div class="grid-data">
+                    
+                      <p class="current-wind"><img class="grid-icon" src=${`assets/images/openweathermap/50n.svg`}>${
+          currentData.wind.speed
+        }</p>
+                      <p class="current-humidity"><img class="grid-icon" src=${`assets/images/openweathermap/humidity.svg`}>${
+          currentData.main.humidity
+        }%</p>
+
+        <p class="current-sunrise"><img class="grid-icon" src=${`assets/images/openweathermap/clear-day.svg`}>${moment
+          .unix(currentData.sys.sunrise)
+          .format(`HH:mm`)}</p>
+
+          <p class="current-sunset"><img class="grid-icon" src=${`assets/images/openweathermap/clear-night.svg`}>${moment
+          .unix(currentData.sys.sunset)
+          .format(`HH:mm`)}</p>
+
+                    </div>
             </div>
             `
       )
@@ -69,7 +82,7 @@ function inputSubmitted(city) {
         const castDate = moment(castObj.dt_txt.split(" ")[0]).format("ddd");
 
         if (dayCount < 5 && !dayTracker[castDate]) {
-          //   forecast.append(`
+          // forecast.append(`
           //   <div class="card-styling">
           //     <h6><strong>${castDate}</strong></h6>
           //     <img src="${`assets/images/openweathermap/${castObj.weather[0].icon}.svg`}" alt="">
