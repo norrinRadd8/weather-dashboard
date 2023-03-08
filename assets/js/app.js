@@ -105,6 +105,7 @@ searchBtn.click(async function (event) {
 
   cityList();
   inputSubmitted(city);
+  searchInput.val("");
 
   console.log(city);
 });
