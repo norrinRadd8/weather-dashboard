@@ -5,6 +5,7 @@ var searchBtn = $("#search-button");
 var searchInput = $("#search-input");
 var historyBtn = $("#history-button");
 var formInput = $(".form-input");
+var welcomeState = $("#welcomeState");
 var today = $("#today");
 var forecast = $("#forecast");
 var fiveDayHeader = $("#fiveDayHeader");
@@ -18,6 +19,13 @@ var forecastURL = baseURL + `forecast?appid=${apiKey}&units=metric&`;
 var storeCity = [];
 var searchHistory = [];
 
+function firstState() {
+  welcomeState.append(
+    `<h1 class="date">${moment().format("ddd DD MMM, YYYY")}</h1>`
+  );
+}
+firstState();
+
 // Submission code that populates the DOM
 function inputSubmitted(city) {
   today.html(" ");
@@ -29,9 +37,7 @@ function inputSubmitted(city) {
       .append(
         `
             <div>
-            <h3 class="date">${moment().format("ddd DD MMM, YYYY")}</h3>
             <h3 class="current-data">${currentData.name}</h3> 
-
         <div class="big-image"><img src="${`assets/images/openweathermap/${currentData.weather[0].icon}.svg`}"  alt=""></div>
                     <p class="current-temp">${Math.round(
                       currentData.main.temp
@@ -62,6 +68,7 @@ function inputSubmitted(city) {
             `
       )
       .removeClass("hide");
+
     // Populates the 5 Day forecast section
     fiveDayHeader
       .append(
@@ -88,7 +95,7 @@ function inputSubmitted(city) {
               <img src="${`assets/images/openweathermap/${castObj.weather[0].icon}.svg`}" alt="">
               <p><img src="${`assets/images/openweathermap/thermometer-celsius.svg`}">${Math.round(
             castObj.main.temp
-          )}</p>
+          )} °C</p>
               <p><img src="${`assets/images/openweathermap/wind.svg`}">${
             castObj.wind.speed
           } </p>

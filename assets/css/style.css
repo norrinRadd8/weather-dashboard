@@ -15,6 +15,11 @@ body{
     background-color: #4FFFD6;
 }
 
+.first-state {
+    padding: 8px;
+
+}
+
 .form {
     display: flex;
     align-items: center;
@@ -64,13 +69,12 @@ body{
     font-size: larger;
   }
 
-  .list-group {
+  #list-wrapper {
     display: flex;
+    justify-content: center;
     flex-direction: row !important;
-    gap: .7em;
-    font-size: 10px;
-    color: #fff;
-    z-index: 6;
+    font-size: 12px;
+    
 }
 
 .current-data {
@@ -146,12 +150,16 @@ body{
 .day {
     display: flex;
 }
-
-
+.list-group {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 3em !important;
+}
 
 .listButton {
     background: none;
     border-style: none;
+    color: #fff;
     
 }
 
@@ -220,9 +228,9 @@ img{
 
 }
 
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
     .form-group {
         width: 50%;
     }
-}
+} */
 

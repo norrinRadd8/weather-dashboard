@@ -7,10 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="assets/css/styles/reset.css" />
   <link rel="stylesheet" href="assets/css/style.css">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /> 
-   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" /> 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /> 
+  <link rel="website icon" type="svg" href="assets/images/openweathermap/01d.svg">
 
   <title>Weather Dashboard</title>
 </head>
@@ -18,9 +16,10 @@
 <body>
   <header class="container-fluid">
     <form id="search-form" class="form">
+      <h1>Weather</h1>
       <div class="form-group">
         <div class="input-group">
-          <input class="form-input weather-search search-input" type="text" id="search-input" placeholder="Search for a country or city"
+          <input class="form-input weather-search search-input" type="text" id="search-input" placeholder="Search for a city"
             aria-labelledby="form-heading" aria-controls="today forecast" />
           <div class="input-group-append">
             <button type="submit" class="btn search-button" id="search-button" aria-label="submit search">
@@ -32,16 +31,25 @@
      
     </form>
   </header>
+  <div id="list-wrapper">
+    <div class="list-group"></div>
+  </div>
   
-  <div class="list-group"></div>
-        <section id="today" class="hide" role="region" aria-live="polite">    
+  
+    <section id="welcomeState" role="region" aria-live="polite">
+      <div class="first-state" class="hide" role="region" aria-live="polite"></div>
+    </section>
+  
+
+  
+        <section id="today">    
           <div class="today-main"></div>
       </div>
     </section>
         <section id="fiveDayHeader" class="hide"></section>
         
       <div class="five-day-forecast">
-        <section id="forecast" class="" role="region" aria-live="polite">  
+        <section id="forecast" class="hide" role="region" aria-live="polite">  
         </section>
       </div>
         
