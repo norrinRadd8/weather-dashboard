@@ -42,9 +42,9 @@ function inputSubmitted(city) {
                     
                     <div class="grid-data">
                     
-                      <p class="current-wind"><img class="grid-icon" src=${`assets/images/openweathermap/50n.svg`}>${
+                      <p class="current-wind"><img class="grid-icon" src=${`assets/images/openweathermap/wind.svg`}>${
           currentData.wind.speed
-        }</p>
+        } mph</p>
                       <p class="current-humidity"><img class="grid-icon" src=${`assets/images/openweathermap/humidity.svg`}>${
           currentData.main.humidity
         }%</p>
@@ -86,9 +86,15 @@ function inputSubmitted(city) {
             <div class="card-styling">
               <h6><strong>${castDate}</strong></h6>
               <img src="${`assets/images/openweathermap/${castObj.weather[0].icon}.svg`}" alt="">
-              <p>${Math.round(castObj.main.temp)}°C</p>
-              <p>Wind: ${castObj.wind.speed} mph</p>
-              <p>Humidity: ${castObj.main.humidity}%</p>
+              <p><img src="${`assets/images/openweathermap/thermometer-celsius.svg`}">${Math.round(
+            castObj.main.temp
+          )}</p>
+              <p><img src="${`assets/images/openweathermap/wind.svg`}">${
+            castObj.wind.speed
+          } </p>
+              <p><img src="${`assets/images/openweathermap/humidity.svg`}">${
+            castObj.main.humidity
+          }%</p>
             </div>
           `);
           dayCount++;
